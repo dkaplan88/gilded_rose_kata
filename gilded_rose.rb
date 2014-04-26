@@ -14,6 +14,10 @@ def aged_brie_item(item)
   item.quality += 1 if item.sell_in <= 0 && item.quality < 50
 end
 
+def sulfuras_item(item)
+  item
+end
+
 def update_quality(items)
   items.each do |item|
     case item.name
@@ -21,6 +25,8 @@ def update_quality(items)
       normal_item(item)
     when 'Aged Brie'
       aged_brie_item(item)
+    when 'Sulfuras, Hand of Ragnaros'
+      sulfuras_item(item)
     else
       if item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert'
         if item.quality > 0
