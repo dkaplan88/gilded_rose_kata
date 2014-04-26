@@ -18,6 +18,16 @@ def sulfuras_item(item)
   item
 end
 
+def backstage_pass_item(item)
+  item.quality += 1 if item.quality < 50
+  item.quality += 1 if item.sell_in <= 10 && item.quality < 50
+  item.quality += 1 if item.sell_in <= 5 && item.quality < 50
+
+  item.quality = 0 if item.sell_in <= 0
+
+  item.sell_in -= 1
+end
+
 def update_quality(items)
   items.each do |item|
     case item.name
@@ -27,6 +37,8 @@ def update_quality(items)
       aged_brie_item(item)
     when 'Sulfuras, Hand of Ragnaros'
       sulfuras_item(item)
+    when 'Backstage passes to a TAFKAL80ETC concert'
+      backstage_pass_item(item)
     else
       if item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert'
         if item.quality > 0
